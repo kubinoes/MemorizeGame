@@ -11,19 +11,25 @@ struct GameView: View {
     @ObservedObject var viewModel: EmojiMemoryGame
     
     var body: some View {
-        ScrollView {
-            LazyVGrid(columns: [GridItem(.adaptive(minimum: 65))]) {
-                ForEach(viewModel.cards) { card in
-                    CardView(card: card)
-                            .aspectRatio(2/3, contentMode: .fit)
-                            .onTapGesture {
-                                viewModel.choose(card)
-                            }
-                    }
+        VStack {
+            Text("\(viewModel.theme.name)").foregroundColor(viewModel.getThemeColor()).font(.largeTitle)
+            Text("Score: \(viewModel.score)").foregroundColor(viewModel.getThemeColor()).font(.largeTitle)
+            ScrollView {
+                LazyVGrid(columns: [GridItem(.adaptive(minimum: 65))]) {
+                    ForEach(viewModel.cards) { card in
+                        CardView(card: card)
+                                .aspectRatio(2/3, contentMode: .fit)
+                                .onTapGesture {
+                                    viewModel.choose(card)
+                                }
+                        }
+                }
             }
+            .foregroundColor(viewModel.getThemeColor())
+            .padding()
+            Spacer()
+            Button(action: {viewModel.playAgain()}, label: {Text("New Game").font(.largeTitle).foregroundColor(viewModel.getThemeColor())})
         }
-        .foregroundColor(.red)
-        .padding()
     }
 }
     
@@ -62,10 +68,6 @@ struct CardView: View {
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         let game = EmojiMemoryGame()
-        GameView(viewModel: game)
-            .previewDevice("iPhone 12 mini")
-            .preferredColorScheme(.dark)
-            .previewInterfaceOrientation(.landscapeLeft)
         GameView(viewModel: game)
             .previewDevice("iPhone 12 mini")
             .preferredColorScheme(.light)
