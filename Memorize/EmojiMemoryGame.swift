@@ -8,14 +8,16 @@
 import SwiftUI
 
 class EmojiMemoryGame: ObservableObject {
-    static let travelEmojis = ["✈️", "🚀", "🚁", "🚜", "🚃", "🚗", "🚡", "🏎", "🛺", "🛳", "🚲", "🛴", "🚚", "🚔", "🏍", "🚑", "🚕", "⛵️", "🚒", "🚤", "🛵", "🚂", "🚐", "🛻"]
-    static let faceEmojis = ["😀", "🥹", "😂", "😎", "🥳", "🤩"]
-    static let halloweenEmojis = ["🎃", "👹", "👺", "👽", "😱", "🦇", "☠️", "👻", "💀", "😈"]
-    static let animalEmojis = ["🐰", "🦊", "🐻", "🐮", "🐷", "🐨"]
-    static let ballEmojis = ["⚽️", "🏀", "🏈", "⚾️", "🎾", "🏐"]
-    static let sportEmojis = ["💃", "⛷", "🏋️‍♀️", "🚴", "🏌️‍♀️", "🧗‍♀️", "🤽‍♀️"]
+    typealias Card = MemoryGame<String>.Card
     
-    static let availableThemes: [EmojiTheme] = [
+    private static let travelEmojis = ["✈️", "🚀", "🚁", "🚜", "🚃", "🚗", "🚡", "🏎", "🛺", "🛳", "🚲", "🛴", "🚚", "🚔", "🏍", "🚑", "🚕", "⛵️", "🚒", "🚤", "🛵", "🚂", "🚐", "🛻"]
+    private static let faceEmojis = ["😀", "🥹", "😂", "😎", "🥳", "🤩"]
+    private static let halloweenEmojis = ["🎃", "👹", "👺", "👽", "😱", "🦇", "☠️", "👻", "💀", "😈"]
+    private static let animalEmojis = ["🐰", "🦊", "🐻", "🐮", "🐷", "🐨"]
+    private static let ballEmojis = ["⚽️", "🏀", "🏈", "⚾️", "🎾", "🏐"]
+    private static let sportEmojis = ["💃", "⛷", "🏋️‍♀️", "🚴", "🏌️‍♀️", "🧗‍♀️", "🤽‍♀️"]
+    
+    private static let availableThemes: [EmojiTheme] = [
         EmojiTheme(name: "Travel", emojis: travelEmojis, numberOfPairs: 6, color: "red"),
         EmojiTheme(name: "Faces", emojis: faceEmojis, numberOfPairs: 4, color: "blue"),
         EmojiTheme(name: "Halloween", emojis: halloweenEmojis, numberOfPairs: 8, color: "black"),
@@ -24,7 +26,7 @@ class EmojiMemoryGame: ObservableObject {
         EmojiTheme(name: "Sports", emojis: sportEmojis, numberOfPairs: 6, color: "yellow"),
     ]
     
-    static func createMemoryGame(with theme: EmojiTheme) -> MemoryGame<String> {
+    private static func createMemoryGame(with theme: EmojiTheme) -> MemoryGame<String> {
         print(theme.emojis)
         let emojiSet = theme.emojis.shuffled()
         print(emojiSet)
@@ -51,7 +53,7 @@ class EmojiMemoryGame: ObservableObject {
         }
     }
     
-    var cards: Array<MemoryGame<String>.Card> {
+    var cards: Array<Card> {
         return model.cards
     }
     
@@ -60,7 +62,7 @@ class EmojiMemoryGame: ObservableObject {
     }
     
     // MARK: - Intent(s)
-    func choose(_ card: MemoryGame<String>.Card) {
+    func choose(_ card: Card) {
         model.choose(card)
     }
     
