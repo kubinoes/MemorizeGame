@@ -18,7 +18,7 @@ class EmojiMemoryGame: ObservableObject {
     private static let sportEmojis = ["💃", "⛷", "🏋️‍♀️", "🚴", "🏌️‍♀️", "🧗‍♀️", "🤽‍♀️"]
     
     private static let availableThemes: [EmojiTheme] = [
-        EmojiTheme(name: "Travel", emojis: travelEmojis, numberOfPairs: 6, color: "red"),
+        EmojiTheme(name: "Travel", emojis: travelEmojis, numberOfPairs: 12, color: "red"),
         EmojiTheme(name: "Faces", emojis: faceEmojis, numberOfPairs: 4, color: "blue"),
         EmojiTheme(name: "Halloween", emojis: halloweenEmojis, numberOfPairs: 8, color: "black"),
         EmojiTheme(name: "Animals", emojis: animalEmojis, numberOfPairs: 50, color: "pink"),
